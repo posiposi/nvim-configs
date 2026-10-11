@@ -1,1 +1,32 @@
+# macOS
 .DS_Store
+
+# 環境変数・シークレット
+.env
+.env.*
+*.secret
+*secret*.lua
+*token*
+*credential*
+
+# 秘密鍵・証明書
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa*
+id_ed25519*
+
+# 環境固有（社内 URL・API キー等）の設定は git 管理外へ
+lua/local.lua
+lua/local/
+*.local.lua
+
+# 個人辞書（社内用語・固有名詞が入りやすい）
+spell/*.add
+spell/*.add.spl
+
+# 一時ファイル
+*.swp
+*.swo
+*~
