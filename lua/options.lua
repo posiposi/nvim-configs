@@ -24,3 +24,21 @@ vim.opt.statusline = "%f %m%r%=%y %l:%c/%L"
 
 -- 補完メニュー(第6章): 候補を自動選択せず、ドキュメントをポップアップ表示
 vim.opt.completeopt = { "menuone", "noselect", "popup" }
+
+-- タブライン: 画面上部にバッファ一覧をタブ風に並べる(プラグインなし)
+function _G.BufTabline()
+  local s = ""
+  local cur = vim.api.nvim_get_current_buf()
+  for _, b in ipairs(vim.api.nvim_list_bufs()) do
+    if vim.bo[b].buflisted then
+      local name = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(b), ":t")
+      if name == "" then name = "[No Name]" end
+      local hl = b == cur and "%#TabLineSel#" or "%#TabLine#"
+      local mod = vim.bo[b].modified and " +" or ""
+      s = s .. hl .. " " .. name:gsub("%%", "%%%%") .. mod .. " "
+    end
+  end
+  return s .. "%#TabLineFill#"
+end
+vim.opt.showtabline = 2 -- バッファが1つでも常に表示
+vim.opt.tabline = "%!v:lua.BufTabline()"
