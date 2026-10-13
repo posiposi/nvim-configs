@@ -17,3 +17,15 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
   desc = "Markdown では単語単位で折り返す",
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+  group = group,
+  pattern = "php",
+  callback = function()
+    -- 保存時の LSP フォーマットもこの幅 (tabSize) で整形される
+    vim.bo.shiftwidth = 4
+    vim.bo.tabstop = 4
+    vim.bo.softtabstop = 4
+  end,
+  desc = "PHP ではインデント幅を4にする",
+})
