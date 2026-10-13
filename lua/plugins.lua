@@ -16,6 +16,8 @@ vim.pack.add({
   },
   -- Oil.nvimファイルエクスプローラー用のアイコンセット
   { src = 'https://github.com/nvim-tree/nvim-web-devicons' },
+  -- Git の差分をサイン列に表示する
+  { src = "https://github.com/lewis6991/gitsigns.nvim" },
 })
 
 -- カラースキームの適用
@@ -30,3 +32,6 @@ vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "バッファ一覧"
 -- oil: - で今のファイルの親ディレクトリを開く
 require("oil").setup()
 vim.keymap.set("n", "-", "<cmd>Oil<CR>", { desc = "ファイル操作バッファ" })
+
+-- gitsigns: 変更のある行の横(サイン列)に追加・変更・削除の印を常時表示する
+require("gitsigns").setup()
