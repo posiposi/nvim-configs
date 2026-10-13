@@ -1,6 +1,6 @@
 -- 追加パーサの導入対象。同梱パーサ(c / lua / markdown / vim / vimdoc / query)
 -- 以外で使う言語をここに並べる。導入済みなら何もしない(毎回走らせてよい)
-require("nvim-treesitter").install({ "go" })
+require("nvim-treesitter").install({ "go", "php", "phpdoc", "blade", "html" })
 
 -- パーサのあるファイルタイプだけ、ハイライトと折りたたみを有効化する
 vim.api.nvim_create_autocmd("FileType", {

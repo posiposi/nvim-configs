@@ -16,7 +16,37 @@ vim.lsp.config("gopls", {
   root_markers = { "go.mod", ".git" },
 })
 
-vim.lsp.enable({ "lua_ls", "gopls" })
+-- PHP: intelephense(無料版。npm i -g intelephense で導入済み)
+vim.lsp.config("intelephense", {
+  cmd = { "intelephense", "--stdio" },
+  filetypes = { "php" },
+  root_markers = { "composer.json", ".git" },
+  init_options = {
+    -- 起動直後のインデックス置き場(既定は一時ディレクトリで再起動のたびに作り直しになる)
+    storagePath = vim.fn.stdpath("cache") .. "/intelephense",
+  },
+  settings = {
+    intelephense = {
+      telemetry = { enabled = false }, -- 利用状況の送信を止める(nvim-lspconfig の既定に合わせる)
+    },
+  },
+})
+
+-- Laravel: 公式の Laravel LSP(composer global require laravel/lsp で導入)
+-- 設定は https://github.com/laravel/lsp の Neovim 節に準拠
+vim.lsp.config("laravel_lsp", {
+  cmd = { "laravel-lsp" },
+  filetypes = { "php", "blade" },
+  -- artisan がある(= Laravel アプリの)ときだけ起動する
+  root_dir = function(bufnr, on_dir)
+    local root = vim.fs.root(bufnr, "artisan")
+    if root then
+      on_dir(root)
+    end
+  end,
+})
+
+vim.lsp.enable({ "lua_ls", "gopls", "intelephense", "laravel_lsp" })
 
 -- 診断の行内表示は既定オフ(Neovim 0.11 以降)なので明示的に有効化
 vim.diagnostic.config({ virtual_text = true })
