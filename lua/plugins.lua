@@ -1,8 +1,5 @@
 -- プラグインの宣言はすべてこのファイルに集める(vim.pack は Neovim 0.12 以降)
 vim.pack.add({
-  -- カラースキーム
-  { src = "https://github.com/folke/tokyonight.nvim" },
-
   -- ファジーファインダ(telescope)と、その依存(plenary)
   -- vim.pack は依存を解決しないので、依存も自分で並べる
   { src = "https://github.com/nvim-lua/plenary.nvim" },
@@ -22,7 +19,7 @@ vim.pack.add({
 })
 
 -- カラースキームの適用
-vim.cmd.colorscheme("tokyonight-night")
+vim.cmd.colorscheme("lunaperche")
 
 -- telescope: 第4章と同じ流儀で <leader> 起点のキーマップ
 local builtin = require("telescope.builtin")

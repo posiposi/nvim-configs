@@ -13,3 +13,6 @@ map("n", "j", function() return vim.v.count == 0 and "gj" or "j" end,
   { expr = true, desc = "表示行で下へ" })
 map("n", "k", function() return vim.v.count == 0 and "gk" or "k" end,
   { expr = true, desc = "表示行で上へ" })
+
+-- d による削除は、削除した文字をレジスタ(=クリップボード)に残さない
+map({ "n", "x" }, "d", '"_d', { desc = "削除(レジスタに残さない)" })
