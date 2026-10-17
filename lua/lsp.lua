@@ -46,7 +46,31 @@ vim.lsp.config("laravel_lsp", {
   end,
 })
 
-vim.lsp.enable({ "lua_ls", "gopls", "intelephense", "laravel_lsp" })
+vim.lsp.config("docker_language_server", {
+  cmd = { "docker-language-server", "start", "--stdio" },
+  filetypes = { "dockerfile" },
+  root_markers = { "Dockerfile", ".git" },
+  init_options = {
+    telemetry = "off",
+  },
+})
+
+
+vim.lsp.config("yamlls", {
+  cmd = { "yaml-language-server", "--stdio" },
+  filetypes = { "yaml", "yaml.docker-compose", "yaml.gitlab" },
+  root_markers = { ".git" },
+  settings = {
+    yaml = {
+      schemaStore = { enable = true },
+    },
+  },
+})
+
+vim.lsp.enable({
+  "lua_ls", "gopls", "intelephense", "laravel_lsp",
+  "docker_language_server", "yamlls",
+})
 
 -- 診断の行内表示は既定オフ(Neovim 0.11 以降)なので明示的に有効化
 vim.diagnostic.config({ virtual_text = true })
