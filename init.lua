@@ -1,4 +1,3 @@
--- リーダーキーはキーマップ定義より前に決める
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 

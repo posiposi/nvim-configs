@@ -1,4 +1,3 @@
--- 再読み込みしても二重登録されないよう、グループを作って毎回クリアする
 local group = vim.api.nvim_create_augroup("my-config", { clear = true })
 
 vim.api.nvim_create_autocmd("TextYankPost", {
@@ -11,7 +10,6 @@ vim.api.nvim_create_autocmd("FileType", {
   group = group,
   pattern = "markdown",
   callback = function()
-    -- 散文は論理行が長いので、折り返しを単語境界にする
     vim.wo.wrap = true
     vim.wo.linebreak = true
   end,
@@ -22,7 +20,6 @@ vim.api.nvim_create_autocmd("FileType", {
   group = group,
   pattern = "php",
   callback = function()
-    -- 保存時の LSP フォーマットもこの幅 (tabSize) で整形される
     vim.bo.shiftwidth = 4
     vim.bo.tabstop = 4
     vim.bo.softtabstop = 4
