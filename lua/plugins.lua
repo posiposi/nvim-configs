@@ -20,7 +20,11 @@ vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "ファイル検�
 vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "grep 検索" })
 vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "バッファ一覧" })
 
-require("oil").setup()
+require("oil").setup({
+  view_options = {
+    show_hidden = true,
+  },
+})
 vim.keymap.set("n", "-", "<cmd>Oil<CR>", { desc = "ファイル操作バッファ" })
 
 require("gitsigns").setup()
