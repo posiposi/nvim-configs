@@ -77,7 +77,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
         { autotrigger = true })
     end
 
-    if not client:supports_method("textDocument/willSaveWaitUntil")
+    -- intelephense の整形はプロジェクトの phpcs(PSR2)と合わないので、保存時に整形しない
+    if client.name ~= "intelephense"
+        and not client:supports_method("textDocument/willSaveWaitUntil")
         and client:supports_method("textDocument/formatting") then
       vim.api.nvim_create_autocmd("BufWritePre", {
         group = vim.api.nvim_create_augroup("my-lsp-fmt", { clear = false }),
